@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/bridge-deploy/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/bridge-deploy/static/js/main.ac9f6fbf.chunk.js",
+    "main.js.map": "/bridge-deploy/static/js/main.ac9f6fbf.chunk.js.map",
+    "runtime-main.js": "/bridge-deploy/static/js/runtime-main.87a4dd06.js",
+    "runtime-main.js.map": "/bridge-deploy/static/js/runtime-main.87a4dd06.js.map",
+    "static/js/2.86b3e6ae.chunk.js": "/bridge-deploy/static/js/2.86b3e6ae.chunk.js",
+    "static/js/2.86b3e6ae.chunk.js.map": "/bridge-deploy/static/js/2.86b3e6ae.chunk.js.map",
+    "static/js/3.1da3945f.chunk.js": "/bridge-deploy/static/js/3.1da3945f.chunk.js",
+    "static/js/3.1da3945f.chunk.js.map": "/bridge-deploy/static/js/3.1da3945f.chunk.js.map",
+    "index.html": "/bridge-deploy/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/bridge-deploy/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.86b3e6ae.chunk.js.LICENSE.txt": "/bridge-deploy/static/js/2.86b3e6ae.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/bridge-deploy/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.87a4dd06.js",
+    "static/js/2.86b3e6ae.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.ac9f6fbf.chunk.js"
+  ]
+}
