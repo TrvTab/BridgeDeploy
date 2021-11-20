@@ -8,6 +8,9 @@ function MarkerList(props){
     const [markerItems, setMarkerItems] = useState([])
     const [showForm, setShowForm] = useState(false)
 
+    const handleCancelMarker = () => {
+        setShowForm(false);
+    }
 
 
     const handleRemove = (key) => {
@@ -48,6 +51,7 @@ function MarkerList(props){
     
 
     return (
+      <div style={{height: 70, width: 300, float:'right'}}>
       <Container>
         {!showForm && (
           <ul>
@@ -56,12 +60,13 @@ function MarkerList(props){
           </ul>
         )}
         {showForm && (
-            <div>
-                <MarkerForm submitMarker={submitMarker}></MarkerForm>
+            <div style={{marginTop: 20}}>
+                <MarkerForm submitMarker={submitMarker} onCancelMarker={handleCancelMarker}></MarkerForm>
             </div>
         )}
 
       </Container>
+      </div>
     );
 }
 export default MarkerList;

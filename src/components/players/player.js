@@ -58,6 +58,11 @@ class Player extends Component {
     this.setState({inLoop: false})
   }
 
+  handlePlayPause = () => {
+    this.setState({ playing: !this.state.playing })
+  }
+
+
   // add if statements for 
   handleDictaphoneData = (childData) => {
     this.setState(() => {
@@ -69,6 +74,8 @@ class Player extends Component {
     else if (childData.request === "skipBwd") this.vocalSkipBackwards(15);
     else if (childData.request === "restart") this.vocalRestart();
     else if (childData.request === "exitLoop") this.vocalExitLoop();
+    else if (childData.request === "pause") this.handlePlayPause()
+    else if (childData.request === "play") this.handlePlayPause()
     else if (childData.request === "addMarker") this.vocalPassInfoToApp(childData);
     else if (childData.request === "addLoop") this.vocalPassInfoToApp(childData)
     else if (childData.request === 'delMarker') this.vocalPassInfoToApp(childData)
@@ -89,9 +96,7 @@ class Player extends Component {
     })
   }
 
-  handlePlayPause = () => {
-    this.setState({ playing: !this.state.playing })
-  }
+  
 
   handleStop = () => {
     this.setState({ url: null, playing: false })
@@ -234,6 +239,10 @@ class Player extends Component {
         }
       }
     }
+    if (prevProps.url !== this.props.url){
+      console.log(this.props.url);
+      this.load(this.props.url);
+    }
 
   }
 
@@ -250,8 +259,6 @@ class Player extends Component {
             <ReactPlayer
               ref={this.ref}
               className='react-player'
-              width='100%'
-              height='100%'
               url={url}
               pip={pip}
               playing={playing}
@@ -316,7 +323,7 @@ class Player extends Component {
           </Container>
          
                 
-                  <label style={{marginRight: 10}}for="customUrl"> New Url </label>
+                  <label style={{marginRight: 10}}for="customUrl"> New Youtube Url </label>
                   <input id="customUrl" ref={input => { this.urlInput = input }} type='text' placeholder='Enter URL' />
                   <button onClick={() => this.setState({ url: this.urlInput.value })}>Load</button>
                

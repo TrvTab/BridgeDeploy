@@ -61,6 +61,14 @@ function Dictaphone(props) {
     {
       command: 'exit loop',
       callback: () => setMessage({request: "exitLoop"})
+    },
+    {
+      command: 'pause',
+      callback: () => setMessage({request: 'pause'})
+    },
+    {
+      command: 'play',
+      callback: () => setMessage({request: 'play'})
     }
 
   ]
@@ -98,7 +106,6 @@ function Dictaphone(props) {
       <button onClick={SpeechRecognition.startListening}>Start</button>
       <button onClick={SpeechRecognition.stopListening}>Stop</button>
       <button onClick={resetTranscript}>Reset</button>
-      <p>{message.request + " " + message.name}</p>
       <p>{transcript}</p>
     </div>
   );
