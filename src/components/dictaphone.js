@@ -36,7 +36,7 @@ function Dictaphone(props) {
           setMessage({request: 'delLoop', name: name.toLowerCase()})
     },
     {
-      command: 'skip ahead',
+      command: 'skip forward',
       callback: () =>
           setMessage({request: 'skipFwd'})
     },

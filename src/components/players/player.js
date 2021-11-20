@@ -1,21 +1,21 @@
+/*
+The MIT License
+Copyright © Pete Cook http://cookpete.com
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import Dictaphone from '../dictaphone'
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import './player.css'
 
 import { updateAndNotify } from 'react'
 
 
-// import { hot } from 'react-hot-loader'
-//full from 'screenfull'
-
-// import './reset.css'
-// import './defaults.css'
-// import './range.css'
-// import './App.css'
 
 import { version } from '../../../package.json'
 import ReactPlayer from 'react-player/lazy'
@@ -280,9 +280,9 @@ class Player extends Component {
           
 
           <Container>
-            <Row>
-              <Col><input
-                      type='range' min={0} max={0.999999} step='any'
+            <Row >
+              <Col lg={true} md={8}><input
+                      type='range' min={0} max={0.999999} step='any' style={{width: "700px"}}
                       value={played}
                       onMouseDown={this.handleSeekMouseDown}
                       onChange={this.handleSeekChange}
@@ -292,11 +292,11 @@ class Player extends Component {
             </Row>
             <Row>
               <Col>
-              <button onClick={this.handleSkipBackwardClick} value={15}>Rewind 15s</button>
-              <button onClick={this.handlePlayPause}>{playing ? 'Pause' : 'Play'}</button>
-              <button onClick={this.handleSkipForwardClick} value={15}>Skip 15s</button>
-
-              <select onChange={this.handleSetPlaybackRate} name="playback speed" id="playbackSpeed" >
+              <button className="controlButton" onClick={this.vocalRestart} value={15}>Restart</button>
+              <button className="controlButton"  onClick={this.handleSkipBackwardClick} value={15}>Rewind 15s</button>
+              <button className="controlButton"  onClick={this.handlePlayPause}>{playing ? 'Pause' : 'Play'}</button>
+              <button className="controlButton"  onClick={this.handleSkipForwardClick} value={15}>Skip 15s</button>
+              <select className="controlButton"  onChange={this.handleSetPlaybackRate} name="playback speed" id="playbackSpeed" >
                 <option value={0.25}>0.25x</option>
                 <option value={0.50}>0.50x</option>
                 <option value={0.75}>0.75x</option>
@@ -305,126 +305,21 @@ class Player extends Component {
                 <option value={1.50}>1.50x</option>
                 <option value={1.75}>1.75x</option>
               </select>
-              <input type='range' min={0} max={1} step='any' value={volume} onChange={this.handleVolumeChange} />
+              
+              <div style={{marginTop: 15}}>
+              <input id="volume" name="volume" type='range' min={0} max={1} step='any' value={volume} onChange={this.handleVolumeChange}  />
+              <label for="volume">Volume</label>
+              </div>
 
               </Col>
             </Row>
           </Container>
-          <table>
-            <tbody>
-              <tr>
-                <th>Controls</th>
-                <td>
-                  <button onClick={this.handleStop}>Stop</button>
-                  <button onClick={this.handlePlayPause}>{playing ? 'Pause' : 'Play'}</button>
-                  {light &&
-                    <button onClick={() => this.player.showPreview()}>Show preview</button>}
-                  {ReactPlayer.canEnablePIP(url) &&
-                    <button onClick={this.handleTogglePIP}>{pip ? 'Disable PiP' : 'Enable PiP'}</button>}
-                </td>
-              </tr>
-              <tr>
-                <th>Speed</th>
-                <td>
-                  <button onClick={this.handleSetPlaybackRate} value={.25}>.25x</button>
-                  <button onClick={this.handleSetPlaybackRate} value={.5}>.5x</button>
-                  <button onClick={this.handleSetPlaybackRate} value={.75}>.75x</button>
-                  <button onClick={this.handleSetPlaybackRate} value={1}>1x</button>
-                  <button onClick={this.handleSetPlaybackRate} value={1.5}>1.5x</button>
-                  <button onClick={this.handleSetPlaybackRate} value={2}>2x</button>
-                </td>
-              </tr>
-              <tr>
-                <th> Skip </th>
-                <td>
-                  <button onClick={this.handleSkipBackwardClick} value={15}>Rewind 15</button>
-                  <button onClick={this.handleSkipForwardClick} value={15}>Skip 15</button>
-                </td>
-              </tr>
-              <tr>
-                <th>Seek</th>
-                <td>
-                  <input
-                    type='range' min={0} max={0.999999} step='any'
-                    value={played}
-                    onMouseDown={this.handleSeekMouseDown}
-                    onChange={this.handleSeekChange}
-                    onMouseUp={this.handleSeekMouseUp}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <th>Volume</th>
-                <td>
-                  <input type='range' min={0} max={1} step='any' value={volume} onChange={this.handleVolumeChange} />
-                </td>
-              </tr>
-              <tr>
-                <th>
-                  <label htmlFor='controls'>Controls</label>
-                </th>
-                <td>
-                  <input id='controls' type='checkbox' checked={controls} onChange={this.handleToggleControls} />
-                  <em>&nbsp; Requires player reload</em>
-                </td>
-              </tr>
-              <tr>
-                <th>
-                  <label htmlFor='muted'>Muted</label>
-                </th>
-                <td>
-                  <input id='muted' type='checkbox' checked={muted} onChange={this.handleToggleMuted} />
-                </td>
-                <td>
-                </td>
-              </tr>
-              <tr>
-                <th>
-                  <label htmlFor='loop'>Loop</label>
-                </th>
-                <td>
-                  <input id='loop' type='checkbox' checked={loop} onChange={this.handleToggleLoop} />
-                </td>
-              </tr>
-              <tr>
-                <th>
-                  <label htmlFor='light'>Light mode</label>
-                </th>
-                <td>
-                  <input id='light' type='checkbox' checked={light} onChange={this.handleToggleLight} />
-                </td>
-              </tr>
-              <tr>
-                <th>Played</th>
-                <td><progress max={1} value={played} /></td>
-              </tr>
-              <tr>
-                <th>Loaded</th>
-                <td><progress max={1} value={loaded} /></td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-        <section className='section'>
-          <table>
-            <tbody>
-              <tr>
-                <th>YouTube</th>
-                <td>
-                  {this.renderLoadButton('https://www.youtube.com/watch?v=oUFJJNQGwhk', 'Test A')}
-                  {this.renderLoadButton('https://www.youtube.com/watch?v=jNgP6d9HraI', 'Test B')}
-                  {this.renderLoadButton('https://www.youtube.com/playlist?list=PLogRWNZ498ETeQNYrOlqikEML3bKJcdcx', 'Playlist')}
-                </td>
-              </tr>
-              <tr>
-                <th>Custom URL</th>
-                <td>
-                  <input ref={input => { this.urlInput = input }} type='text' placeholder='Enter URL' />
+         
+                
+                  <label style={{marginRight: 10}}for="customUrl"> New Url </label>
+                  <input id="customUrl" ref={input => { this.urlInput = input }} type='text' placeholder='Enter URL' />
                   <button onClick={() => this.setState({ url: this.urlInput.value })}>Load</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+               
 
           <Dictaphone sendToPlayer={this.handleDictaphoneData}/>
 

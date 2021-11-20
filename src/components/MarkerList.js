@@ -52,7 +52,7 @@ function MarkerList(props){
         {!showForm && (
           <ul>
             {markerItems}
-            <Button onClick={addMarker}></Button>
+            <Button onClick={addMarker}>Add Marker</Button>
           </ul>
         )}
         {showForm && (

@@ -62,7 +62,7 @@ function LoopList(props){
         {!showForm && (
           <ul>
             {loopItems}
-            <Button onClick={addLoop}></Button>
+            <Button onClick={addLoop}>Add Loop</Button>
           </ul>
         )}
         {showForm && (
