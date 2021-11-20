@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/bridge-deploy/static/css/main.9c434ce2.chunk.css",
-    "main.js": "/bridge-deploy/static/js/main.0d1776b2.chunk.js",
-    "main.js.map": "/bridge-deploy/static/js/main.0d1776b2.chunk.js.map",
+    "main.css": "/bridge-deploy/static/css/main.35024f0d.chunk.css",
+    "main.js": "/bridge-deploy/static/js/main.9525bbee.chunk.js",
+    "main.js.map": "/bridge-deploy/static/js/main.9525bbee.chunk.js.map",
     "reactPlayerDailyMotion.js": "/bridge-deploy/static/js/reactPlayerDailyMotion.7d5610ed.chunk.js",
     "reactPlayerDailyMotion.js.map": "/bridge-deploy/static/js/reactPlayerDailyMotion.7d5610ed.chunk.js.map",
     "reactPlayerFacebook.js": "/bridge-deploy/static/js/reactPlayerFacebook.2bda4afb.chunk.js",
@@ -32,21 +32,21 @@
     "runtime-main.js": "/bridge-deploy/static/js/runtime-main.c8501804.js",
     "runtime-main.js.map": "/bridge-deploy/static/js/runtime-main.c8501804.js.map",
     "static/css/15.383c0125.chunk.css": "/bridge-deploy/static/css/15.383c0125.chunk.css",
-    "static/js/15.07b65708.chunk.js": "/bridge-deploy/static/js/15.07b65708.chunk.js",
-    "static/js/15.07b65708.chunk.js.map": "/bridge-deploy/static/js/15.07b65708.chunk.js.map",
+    "static/js/15.0a645653.chunk.js": "/bridge-deploy/static/js/15.0a645653.chunk.js",
+    "static/js/15.0a645653.chunk.js.map": "/bridge-deploy/static/js/15.0a645653.chunk.js.map",
     "static/js/16.7ced2318.chunk.js": "/bridge-deploy/static/js/16.7ced2318.chunk.js",
     "static/js/16.7ced2318.chunk.js.map": "/bridge-deploy/static/js/16.7ced2318.chunk.js.map",
     "index.html": "/bridge-deploy/index.html",
     "static/css/15.383c0125.chunk.css.map": "/bridge-deploy/static/css/15.383c0125.chunk.css.map",
-    "static/css/main.9c434ce2.chunk.css.map": "/bridge-deploy/static/css/main.9c434ce2.chunk.css.map",
-    "static/js/15.07b65708.chunk.js.LICENSE.txt": "/bridge-deploy/static/js/15.07b65708.chunk.js.LICENSE.txt",
+    "static/css/main.35024f0d.chunk.css.map": "/bridge-deploy/static/css/main.35024f0d.chunk.css.map",
+    "static/js/15.0a645653.chunk.js.LICENSE.txt": "/bridge-deploy/static/js/15.0a645653.chunk.js.LICENSE.txt",
     "static/media/logo.6ce24c58.svg": "/bridge-deploy/static/media/logo.6ce24c58.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.c8501804.js",
     "static/css/15.383c0125.chunk.css",
-    "static/js/15.07b65708.chunk.js",
-    "static/css/main.9c434ce2.chunk.css",
-    "static/js/main.0d1776b2.chunk.js"
+    "static/js/15.0a645653.chunk.js",
+    "static/css/main.35024f0d.chunk.css",
+    "static/js/main.9525bbee.chunk.js"
   ]
 }
