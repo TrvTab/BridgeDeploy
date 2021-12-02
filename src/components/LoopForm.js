@@ -12,18 +12,18 @@ import {
   Toast,
 } from "react-bootstrap";
 
-function LoopForm({ submitLoop, onCancelLoop }) {
+function LoopForm({submitLoop, onCancelLoop, errorMessage}) {
   const [title, setTitle] = useState();
   const [colour, setColour] = useState();
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
-  const [errorMsg, setErrorMsg] = useState("");
+  const [showErrorMessage, setShowErrorMessage] = useState("");
 
   const handleSubmit = (e) => {
-
-    if(validateName()){
-      submitLoop(title, colour, startTime, endTime);
+    if(errorMessage){
+      setShowErrorMessage(true);
     }
+    submitLoop(title, colour, startTime, endTime);
     e.preventDefault();
   };
 
@@ -31,43 +31,12 @@ function LoopForm({ submitLoop, onCancelLoop }) {
     onCancelLoop();
   };
 
-  const validateName = () => {
-    let invalidSubstrings = [
-      "0",
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "!",
-      "@",
-      "#",
-      "$",
-      "%",
-      "^",
-      "&",
-      "*",
-      "(",
-      ")",
-      "_",
-      "+",
-    ];
-    if (title === "") {
-      setErrorMsg("Please provide a non-empty loop name");
-      return false;
-    } else if (invalidSubstrings.some(str => title.includes(str))){
-      setErrorMsg("Invalid character included");
-      return false;
-    } else {
-      setErrorMsg("")
-      return true;
+  useEffect(() => {
+    if(errorMessage){
+      setShowErrorMessage(true);
     }
-  };
-
+  }, [errorMessage]);
+  
   return (
     <Form
       onSubmit={(e) => {
@@ -106,17 +75,16 @@ function LoopForm({ submitLoop, onCancelLoop }) {
         </Form.Group>
         <Button type="submit">Submit Loop</Button>
         <Button onClick={handleCancelLoop}>Cancel</Button>
-        <Toast show={errorMsg !== ""}>
+        <Toast onClose={() => setShowErrorMessage(false)} show={showErrorMessage} delay={3000} autohide>
           <Toast.Header>
             <img
               src="holder.js/20x20?text=%20"
               className="rounded me-2"
               alt=""
             />
-            <strong className="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
+            <strong className="me-auto">Error Message</strong>
           </Toast.Header>
-          <Toast.Body>{errorMsg}</Toast.Body>
+          <Toast.Body>{errorMessage}</Toast.Body>
         </Toast>
       </Row>
     </Form>

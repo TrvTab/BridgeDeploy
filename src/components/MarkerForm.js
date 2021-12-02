@@ -1,15 +1,19 @@
 import { useState, useEffect} from 'react'
 import Marker from './Marker'
-import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react-bootstrap';
+import {Button, Container, Stack, Row, Col, CloseButton, Text, Form, Toast} from 'react-bootstrap';
 
 
-function MarkerForm({submitMarker, onCancelMarker}){
+function MarkerForm({submitMarker, onCancelMarker, errorMessage}){
 
   const [title, setTitle] = useState();
   const [colour, setColour] = useState();
   const [time, setTime] = useState();
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   const handleSubmit= (e) => {
+    if(errorMessage){
+      setShowErrorMessage(true);
+    }
     submitMarker(title, colour, time)
     e.preventDefault();
 
@@ -19,6 +23,12 @@ function MarkerForm({submitMarker, onCancelMarker}){
         onCancelMarker();
     }
 
+    useEffect(() => {
+      if(errorMessage){
+        setShowErrorMessage(true);
+      }
+    }, [errorMessage]);
+    
   return(
         <Form onSubmit={e => { handleSubmit(e) }}>
           <Form.Group className="mb-3">
@@ -43,6 +53,17 @@ function MarkerForm({submitMarker, onCancelMarker}){
                 <Button type='submit'>Submit Marker</Button>
                 <Button onClick={handleCancelMarker}>Cancel </Button>
           </Row>
+          <Toast onClose={() => setShowErrorMessage(false)} show={showErrorMessage} delay={3000} autohide>
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">Error Message</strong>
+          </Toast.Header>
+          <Toast.Body>{errorMessage}</Toast.Body>
+        </Toast>
         </Form>
   );
 }

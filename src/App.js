@@ -17,6 +17,7 @@ function App() {
   const [url, setUrl] = useState();
   const [urlInput, setUrlInput] = useState();
 
+
   const [command, setCommandState] = useState({
     request: '',
     name: '',
@@ -47,6 +48,8 @@ function App() {
     setShowLandingPage(false)
     setUrl(urlInput.value);
   }
+
+
   return (
     <div>
       {showLandingPage && (

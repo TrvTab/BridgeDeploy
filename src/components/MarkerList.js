@@ -2,7 +2,8 @@ import { useState, useEffect} from 'react'
 import Marker from './Marker'
 import MarkerForm from './MarkerForm'
 import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react-bootstrap';
-import {convertToMinutes, convertToSeconds, between } from "../Utils"
+import {convertToMinutes, convertToSeconds, between, validateName } from "../Utils";
+import "./MarkerList.css";
 
 
 function MarkerList(props){
@@ -13,16 +14,17 @@ function MarkerList(props){
 
 
     const handleCancelMarker = () => {
-        setShowForm(false);
+      setShowForm(false);
     }
-
-    
 
     const handleRemove = (key) => {
         setMarkerItems(markerItems => markerItems.filter((item) => item.key !== key))
     }
 
     const submitMarker = (title, colour, time) => {
+      let returnedErrorMessage = validateName(title, markerItems);
+      setErrorMessage(returnedErrorMessage)
+      if(!returnedErrorMessage){
         setShowForm(false)
         setMarkerItems(markerItems => [...markerItems,
         <li list-style="none" key={title}>
@@ -31,6 +33,7 @@ function MarkerList(props){
                 <CloseButton onClick={() => handleRemove(title)}></CloseButton>
             </Row>
         </li>])
+      }
     }
 
     const handleMarkerClicked = (key) => {
@@ -38,10 +41,6 @@ function MarkerList(props){
     }
 
     const handleGoToMarker = (key,request) => {
-      console.log("ADSKSOKAOSKDSAOK")
-      console.log(markerItems);
-      console.log(key)
-      
       let foundItem = markerItems.find(item => item.key === key).props.children.props.children[0].props
       let timeSeconds = convertToSeconds(foundItem.time)
       let foundItemCopy =  Object.assign({request: request}, foundItem)
@@ -55,12 +54,18 @@ function MarkerList(props){
     }, [goToMarkerDest])
 
     const validateAddMarker = (commandData) => {
-      if (!between(commandData.time, 0, commandData.duration)){
+      if (!between(commandData.firstTimeStamp, 0, commandData.duration)){
+        console.log("fuck")
+        console.log(commandData)
+
         setErrorMessage("Marker exceeds video limits")
         return false
       }
+      console.log("afterBetween")
+
       let duplicate = markerItems.find(element => commandData.name === element.key)
       if (duplicate) {
+        console.log("duplicateFalse")
         return false
       }
       return true
@@ -82,10 +87,12 @@ function MarkerList(props){
           submitMarker(props.commandInformation.name, "colour", convertToMinutes(props.commandInformation.firstTimeStamp));
         }
       } else if (props.commandInformation.request === "delMarker"){
+        console.log("delMarker")
         if (validateMarkerPresent(props.commandInformation)){
           handleRemove(props.commandInformation.name)
         }
       } else if (props.commandInformation.request === "goToMarker"){
+        console.log("goToMarker")
         if (validateMarkerPresent(props.commandInformation)){
 
           handleGoToMarker(props.commandInformation.name, props.commandInformation.request);       
@@ -105,12 +112,12 @@ function MarkerList(props){
         {!showForm && (
           <ul>
             {markerItems}
-            <Button onClick={addMarker}>Add Marker</Button>
+            <Button className="custom-btn" onClick={addMarker}>Add Marker</Button>
           </ul>
         )}
         {showForm && (
             <div style={{marginTop: 20}}>
-                <MarkerForm submitMarker={submitMarker} onCancelMarker={handleCancelMarker}></MarkerForm>
+                <MarkerForm errorMessage={errorMessage} submitMarker={submitMarker} onCancelMarker={handleCancelMarker}></MarkerForm>
             </div>
         )}
 
