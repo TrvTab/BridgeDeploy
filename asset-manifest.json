@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/bridge-deploy/static/css/main.35024f0d.chunk.css",
-    "main.js": "/bridge-deploy/static/js/main.9856fa57.chunk.js",
-    "main.js.map": "/bridge-deploy/static/js/main.9856fa57.chunk.js.map",
+    "main.js": "/bridge-deploy/static/js/main.798aa990.chunk.js",
+    "main.js.map": "/bridge-deploy/static/js/main.798aa990.chunk.js.map",
     "reactPlayerDailyMotion.js": "/bridge-deploy/static/js/reactPlayerDailyMotion.7d5610ed.chunk.js",
     "reactPlayerDailyMotion.js.map": "/bridge-deploy/static/js/reactPlayerDailyMotion.7d5610ed.chunk.js.map",
     "reactPlayerFacebook.js": "/bridge-deploy/static/js/reactPlayerFacebook.2bda4afb.chunk.js",
@@ -47,6 +47,6 @@
     "static/css/15.383c0125.chunk.css",
     "static/js/15.0a645653.chunk.js",
     "static/css/main.35024f0d.chunk.css",
-    "static/js/main.9856fa57.chunk.js"
+    "static/js/main.798aa990.chunk.js"
   ]
 }
