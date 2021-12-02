@@ -125,14 +125,18 @@ function Dictaphone(props) {
     return <span>Browser doesn't support speech recognition.</span>;
   }
 
+  const startListening = () => SpeechRecognition.startListening({ continuous: true });
+
+  startListening()
+
 
   return (
 
     <div>
       
       <p>Microphone: {listening ? 'on' : 'off'}</p>
-      <button onClick={SpeechRecognition.startListening}>Start Mic Rec.</button>
-      <button onClick={SpeechRecognition.stopListening}>Stop Mic</button>
+      {/* <button onClick={SpeechRecognition.startListening}>Start Mic Rec.</button> */}
+      {/* <button onClick={SpeechRecognition.stopListening}>Stop Mic</button> */}
       <button onClick={resetTranscript}>Reset Mic Text</button>
       <p>{transcript}</p>
        
