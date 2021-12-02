@@ -11,7 +11,7 @@ function Marker(props){
     return (
 
         <Container >
-                <Row>
+                <Row onClick={() => props.onMarkerClicked(title)}>
                     <span>{colour}</span>
                     <Col>
                     <span>{title}</span>

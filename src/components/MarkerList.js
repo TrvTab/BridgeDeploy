@@ -7,9 +7,19 @@ import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react
 function MarkerList(props){
     const [markerItems, setMarkerItems] = useState([])
     const [showForm, setShowForm] = useState(false)
+    const [goToMarkerDest, setGoToMarkerDest] = useState("")
 
     const handleCancelMarker = () => {
         setShowForm(false);
+    }
+
+    const convertToMinutes = time => {
+      let minutes = parseInt(time/60)
+      let seconds = (Math.round(60*((time/60) - minutes))).toString()
+      if (seconds.length === 1) {
+        seconds = "0" + seconds
+      }
+      return minutes + ":" + seconds
     }
 
 
@@ -22,22 +32,33 @@ function MarkerList(props){
         setMarkerItems(markerItems => [...markerItems,
         <li list-style="none" key={title}>
             <Row>
-                <Marker title={title} colour={colour} time={time}></Marker>
+                <Marker title={title} colour={colour} time={time} onMarkerClicked={(key) => handleMarkerClicked(key)}></Marker>
                 <CloseButton onClick={() => handleRemove(title)}></CloseButton>
             </Row>
         </li>])
     }
 
+    const handleMarkerClicked = (key) => {
+      setGoToMarkerDest(key)
+    }
+
     const handleGoToMarker = (key,request) => {
+      console.log(markerItems);
       let foundItem = markerItems.find(item => item.key === key).props.children.props.children[0].props
       let foundItemCopy =  Object.assign({request: request}, foundItem)
       props.onFoundTimeElement(foundItemCopy);
     }
 
+    useEffect(()=> {
+      if(goToMarkerDest)
+      handleGoToMarker(goToMarkerDest, "goToMarker");
+    }, [goToMarkerDest])
+
+
     useEffect(() => {
       if (props.commandInformation.request.includes("loop")) return;
       else if (props.commandInformation.request === "addMarker"){
-       submitMarker(props.commandInformation.name, "colour", props.commandInformation.firstTimeStamp);
+       submitMarker(props.commandInformation.name, "colour", convertToMinutes(props.commandInformation.firstTimeStamp));
       } else if (props.commandInformation.request === "delMarker"){
         handleRemove(props.commandInformation.name)
       } else if (props.commandInformation.request === "goToMarker"){
@@ -49,7 +70,7 @@ function MarkerList(props){
         setShowForm(true)
     }
     
-
+    console.log("test")
     return (
       <div style={{height: 70, width: 300, float:'right'}}>
       <Container>

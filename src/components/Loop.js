@@ -12,7 +12,7 @@ function Loop(props){
     return (
 
         <Container >
-                <Row>
+                <Row onClick={() => props.onLoopClicked(title)}>
                     <span>{colour}</span>
                     <Col>
                     <span>{title}</span>
