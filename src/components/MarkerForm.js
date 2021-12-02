@@ -50,8 +50,8 @@ function MarkerForm({submitMarker, onCancelMarker, errorMessage}){
                 onChange={ e => setTime(e.target.value)}
               />
             </Form.Group>  
-                <Button type='submit'>Submit Marker</Button>
-                <Button onClick={handleCancelMarker}>Cancel </Button>
+                <Button className="custom-btn" type='submit'>Submit Marker</Button>
+                <Button className="custom-btn" onClick={handleCancelMarker}>Cancel </Button>
           </Row>
           <Toast onClose={() => setShowErrorMessage(false)} show={showErrorMessage} delay={3000} autohide>
           <Toast.Header>

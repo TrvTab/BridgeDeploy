@@ -2,6 +2,7 @@ import { useState, useEffect} from 'react'
 import {Button, Container, Stack, Row, Col, CloseButton} from 'react-bootstrap';
 import Circle from 'react-color'
 import { CirclePicker } from 'react-color'
+import "./List.css"
 
 function Marker(props){
     const [title, setTitle] = useState(props.title);
@@ -11,7 +12,7 @@ function Marker(props){
     return (
 
         <Container >
-                <Button onClick={() => props.onMarkerClicked(title)}>
+                <Button className="custom-button-item" onClick={() => props.onMarkerClicked(title)}>
                     <span>{colour}</span>
                     <Col>
                     <span>{title}</span>

@@ -3,7 +3,7 @@ import Marker from './Marker'
 import MarkerForm from './MarkerForm'
 import {Button, Container, Stack, Row, Col, CloseButton, Text, Form} from 'react-bootstrap';
 import {convertToMinutes, convertToSeconds, between, validateName } from "../Utils";
-import "./MarkerList.css";
+import "./List.css";
 
 
 function MarkerList(props){
@@ -29,8 +29,12 @@ function MarkerList(props){
         setMarkerItems(markerItems => [...markerItems,
         <li list-style="none" key={title}>
             <Row>
-                <Marker title={title} colour={colour} time={time} onMarkerClicked={(key) => handleMarkerClicked(key)}></Marker>
-                <CloseButton onClick={() => handleRemove(title)}></CloseButton>
+                <Col>
+                  <Marker title={title} colour={colour} time={time} onMarkerClicked={(key) => handleMarkerClicked(key)}></Marker>
+                </Col>
+                <Col>
+                  <CloseButton onClick={() => handleRemove(title)}></CloseButton>
+                </Col>
             </Row>
         </li>])
       }
@@ -41,7 +45,7 @@ function MarkerList(props){
     }
 
     const handleGoToMarker = (key,request) => {
-      let foundItem = markerItems.find(item => item.key === key).props.children.props.children[0].props
+      let foundItem = markerItems.find(item => item.key === key).props.children.props.children[0].props.children.props
       let timeSeconds = convertToSeconds(foundItem.time)
       let foundItemCopy =  Object.assign({request: request}, foundItem)
       foundItemCopy.time = timeSeconds
@@ -107,16 +111,16 @@ function MarkerList(props){
     
     console.log("test")
     return (
-      <div style={{height: 70, width: 300, float:'right'}}>
-      <Container>
+      <div style={{height: 0, width: 300, float:'right'}}>
+      <Container className="custom-container">
         {!showForm && (
           <ul>
             {markerItems}
-            <Button className="custom-btn" onClick={addMarker}>Add Marker</Button>
+            <Button className="custom-button" onClick={addMarker}>Add Marker</Button>
           </ul>
         )}
         {showForm && (
-            <div style={{marginTop: 20}}>
+            <div style={{marginTop: 0}}>
                 <MarkerForm errorMessage={errorMessage} submitMarker={submitMarker} onCancelMarker={handleCancelMarker}></MarkerForm>
             </div>
         )}

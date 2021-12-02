@@ -73,8 +73,8 @@ function LoopForm({submitLoop, onCancelLoop, errorMessage}) {
             onChange={(e) => setEndTime(e.target.value)}
           />
         </Form.Group>
-        <Button type="submit">Submit Loop</Button>
-        <Button onClick={handleCancelLoop}>Cancel</Button>
+        <Button className="custom-btn" type="submit">Submit Loop</Button>
+        <Button className="custom-btn" onClick={handleCancelLoop}>Cancel</Button>
         <Toast onClose={() => setShowErrorMessage(false)} show={showErrorMessage} delay={3000} autohide>
           <Toast.Header>
             <img

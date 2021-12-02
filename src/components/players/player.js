@@ -49,6 +49,10 @@ class Player extends Component {
     this.player.seekTo(this.player.getCurrentTime() - time, "seconds")
   }
 
+  vocalRestart(){
+    this.player.seekTo(0, "seconds")
+  }
+
   vocalPassInfoToApp(commandData) {
     this.props.onCommandChange(commandData)
   }
@@ -58,9 +62,7 @@ class Player extends Component {
     this.vocalPassInfoToApp(commandDataDuration)
   }
 
-  vocalRestart(){
-    this.player.seekTo(0, "seconds")
-  }
+
 
   vocalExitLoop() {
     this.setState({inLoop: false})
@@ -113,6 +115,7 @@ class Player extends Component {
   }
 
   
+ 
 
   handleStop = () => {
     this.setState({ url: null, playing: false })
@@ -195,6 +198,10 @@ class Player extends Component {
   handleSkipBackwardClick = e => {
     console.log(e)
     this.player.seekTo(this.player.getCurrentTime() - parseInt(e.target.value), "seconds")
+  }
+
+  handleRestartClick = e => {
+    this.player.seekTo(0, "seconds")
   }
 
   handleProgress = state => {
@@ -326,7 +333,7 @@ class Player extends Component {
 
           <Container>
             <Row >
-              <Col lg={true} md={8}>
+              <Col >
                 <span>{this.displayDurationWithTimeStamp(this.state.played, this.state.duration)}</span>
                 <input
                       type='range' min={0} max={0.999999} step='any' style={{width: "700px"}}
@@ -340,10 +347,10 @@ class Player extends Component {
             </Row>
             <Row>
               <Col>
-              <button className="controlButton" onClick={this.vocalRestart} value={15}>Restart</button>
-              <button className="controlButton"  onClick={this.handleSkipBackwardClick} value={15}>Skip Backwards</button>
-              <button className="controlButton"  onClick={this.handlePlayPause}>{playing ? 'Pause' : 'Play'}</button>
-              <button className="controlButton"  onClick={this.handleSkipForwardClick} value={15}>Skip Forwards</button>
+              <button className="controlButton" onClick={this.vocalRestart}>Restart</button>
+              <button className="rewindButton"  onClick={this.handleSkipBackwardClick} value={15}></button>
+              <button className={playing ? "pauseButton" : "playButton"}  onClick={this.handlePlayPause}></button>
+              <button className="forwardButton"  onClick={this.handleSkipForwardClick} value={15}></button>
               <select className="controlButton"  onChange={this.handleSetPlaybackRate} name="playback speed" id="playbackSpeed" >
                 <option value={0.25}>0.25x</option>
                 <option value={0.50}>0.50x</option>
@@ -364,12 +371,13 @@ class Player extends Component {
           </Container>
          
                 
-                  <label style={{marginRight: 10}}for="customUrl"> New Youtube Url </label>
-                  <input id="customUrl" ref={input => { this.urlInput = input }} type='text' placeholder='Enter URL' />
-                  <button onClick={() => this.setState({ url: this.urlInput.value })}>Load</button>
+                  
                
 
           <Dictaphone sendToPlayer={this.handleDictaphoneData}/>
+          <label style={{marginRight: 10}}for="customUrl"> New Youtube Url </label>
+          <input id="customUrl" ref={input => { this.urlInput = input }} type='text' placeholder='Enter URL' />
+          <button onClick={() => this.setState({ url: this.urlInput.value })}>Load</button>
 
           
         </section>

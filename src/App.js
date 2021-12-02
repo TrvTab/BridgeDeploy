@@ -1,54 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
-import Dictaphone from './components/dictaphone';
-import Player from './components/players/player';
-import LoopList from './components/LoopList.js'
-import MarkerList from './components/MarkerList.js'
-import {Row, Col, Modal, Button} from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import {useState} from 'react'
-import InfoModal from './components/InfoModal.js'
-import LandingPage from './components/LandingPage.js'
+import logo from "./logo.svg";
+import "./App.css";
+import Dictaphone from "./components/dictaphone";
+import Player from "./components/players/player";
+import LoopList from "./components/LoopList.js";
+import MarkerList from "./components/MarkerList.js";
+import { Row, Col, Modal, Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from "react";
+import InfoModal from "./components/InfoModal.js";
+import LandingPage from "./components/LandingPage.js";
+import "./App.css"
 
 function App() {
-  
   const [fullscreenLandingPage, setFullscreenLandingPage] = useState(true);
   const [showLandingPage, setShowLandingPage] = useState(true);
   const [url, setUrl] = useState();
   const [urlInput, setUrlInput] = useState();
 
-
   const [command, setCommandState] = useState({
-    request: '',
-    name: '',
-    firstTimeStamp: '',
-    secondTimeStamp: ''
-  })
+    request: "",
+    name: "",
+    firstTimeStamp: "",
+    secondTimeStamp: "",
+  });
 
   const [reply, setReplyState] = useState({
-    request: '',
-    name: '',
-    firstTimeStamp: '',
-    secondTimeStamp: ''
-  })
+    request: "",
+    name: "",
+    firstTimeStamp: "",
+    secondTimeStamp: "",
+  });
 
   const [infoModalShow, setInfoModalShow] = useState(false);
   const handleInfoModalClose = () => setInfoModalShow(false);
   const handleInfoModalShow = () => setInfoModalShow(true);
 
-  function handleFoundTimeElement(reply){
+  function handleFoundTimeElement(reply) {
     setReplyState(reply);
   }
 
-  function handleCommandChange(message){
-    setCommandState(command => message)
+  function handleCommandChange(message) {
+    setCommandState((command) => message);
   }
 
-  function handleSubmitUrl(){
-    setShowLandingPage(false)
+  function handleSubmitUrl() {
+    setShowLandingPage(false);
     setUrl(urlInput.value);
   }
-
 
   return (
     <div>
@@ -58,18 +56,32 @@ function App() {
           fullscreen={fullscreenLandingPage}
           onHide={() => setShowLandingPage(false)}
         >
-          <Modal.Header closeButton>
-            <Modal.Title>Bridge</Modal.Title>
+          <Modal.Header className="custom-modal-header">
+            <Modal.Title className="custom-modal-title">Bridge</Modal.Title>
+            <div className="bridge-logo"></div>
           </Modal.Header>
-          <Modal.Body><p>Welcome to Bridge, a web application that bridges the gap between transcribing music and digital media. This product offers a hands-free method of manipulating music that provides our users with features such as looping, marking tracks, and playback control. Additionally, these same features can all be controlled through voice commands.
-            For the best experience possible, it is recommended to use headphones to listen to the music.
-          </p>
-          <h1>Get Started</h1>
-          <th>Copy Paste YouTube Link</th>
-                <td>
-                  <input ref={input => { setUrlInput(input) }} type='text' placeholder='Enter URL' />
-                  <button onClick={ handleSubmitUrl }> Go</button>
-          </td>
+          <Modal.Body class="custom-modal-body" align="center">
+            <p className="bridge-intro">
+              Welcome to Bridge, a web application that bridges the gap between
+              transcribing music and digital media. This product offers a
+              hands-free method of manipulating music that provides our users
+              with features such as looping, marking tracks, and playback
+              control. Additionally, these same features can all be controlled
+              through voice commands. For the best experience possible, it is
+              recommended to use headphones to listen to the music.
+            </p>
+            <h1>Get Started</h1>
+            <th>Copy Paste YouTube Link</th>
+
+              <input
+                ref={(input) => {
+                  setUrlInput(input);
+                }}
+                type="text"
+                placeholder="Enter URL"
+              />
+              <button onClick={handleSubmitUrl}> Go</button>
+
           </Modal.Body>
         </Modal>
       )}
@@ -96,7 +108,11 @@ function App() {
               ></MarkerList>
             </Col>
           </Row>
-          <Player onCommandChange={handleCommandChange} reply={reply} url={url}/>
+          <Player
+            onCommandChange={handleCommandChange}
+            reply={reply}
+            url={url}
+          />
         </div>
       )}
     </div>

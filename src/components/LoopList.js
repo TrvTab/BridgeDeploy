@@ -4,6 +4,7 @@ import LoopForm from './LoopForm'
 import {Button, Container, Stack, Row, Col, CloseButton, Text, Form, Toast} from 'react-bootstrap';
 import {convertToMinutes, convertToSeconds, between, validateName } from "../Utils"
 import testUtils from 'react-dom/test-utils';
+import "./List.css"
 
 function LoopList(props){
     const [loopItems, setLoopItems] = useState([])
@@ -24,10 +25,14 @@ function LoopList(props){
         if(!returnedErrorMessage){
           setShowForm(false)
           setLoopItems(loopItems => [...loopItems,
-          <li list-style="none" key={title}>
-              <Row>
-                  <Loop title={title} colour={colour} startTime={startTime} endTime={endTime} onLoopClicked={(key) => handleLoopClicked(key)}></Loop>
-                  <CloseButton onClick={() => handleRemove(title)}></CloseButton>
+          <li  list-style="none" key={title} className="custom-list-element">
+              <Row className='custom-row'>
+                  <Col>
+                    <Loop title={title} colour={colour} startTime={startTime} endTime={endTime} onLoopClicked={(key) => handleLoopClicked(key)}></Loop>
+                  </Col>
+                  <Col>
+                    <CloseButton onClick={() => handleRemove(title)}></CloseButton>
+                  </Col>
               </Row>
           </li>])
         }
@@ -52,7 +57,8 @@ function LoopList(props){
   }
 
     const handleGoToLoop = (key,request) => {
-      let foundItem = loopItems.find(item => item.key === key).props.children.props.children[0].props
+      console.log(loopItems);
+      let foundItem = loopItems.find(item => item.key === key).props.children.props.children[0].props.children.props
       let startTimeSeconds = convertToSeconds(foundItem.startTime)
       let endTimeSeconds = convertToSeconds(foundItem.endTime)
       
@@ -120,12 +126,12 @@ function LoopList(props){
     }
 
     return (
-      <div style={{height: 80, width:300, float:'left'}}>
-      <Container>
+      <div style={{height: 0, width:300, float:'left'}}>
+      <Container className="custom-container">
         {!showForm && (
           <ul>
             {loopItems}
-            <Button onClick={addLoop}>Add Loop</Button>
+            <Button className="custom-btn" onClick={addLoop}>Add Loop</Button>
           </ul>
         )}
         {showForm && (
