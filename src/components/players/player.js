@@ -270,6 +270,7 @@ class Player extends Component {
       else if (this.props.reply.request === "goToLoop") {
         console.log(this.props.reply)
         this.setState({inLoop: true, loopStartTime: this.props.reply.startTime, loopEndTime: this.props.reply.endTime}, () =>{
+          console.log((this.props.reply.startTime))
           this.player.seekTo(this.props.reply.startTime, "seconds")
         }
         );

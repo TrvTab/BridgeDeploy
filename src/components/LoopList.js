@@ -36,6 +36,14 @@ function LoopList(props){
       return minutes + ":" + seconds
     }
 
+    const convertToSeconds = (time) => {
+      let arr = time.split(":")
+      var [minutes, seconds] = arr;
+      var totalSeconds = parseInt(minutes) * 60
+      totalSeconds += parseInt(seconds)
+      return totalSeconds
+    }
+
     const handleLoopClicked = (key) => {
       console.log("LOOP??")
       setGoToLoopDest(key);
@@ -48,9 +56,13 @@ function LoopList(props){
 
     const handleGoToLoop = (key,request) => {
       let sampleItem = loopItems.find(item => item.key === key)
-      console.log(sampleItem)
       let foundItem = loopItems.find(item => item.key === key).props.children.props.children[0].props
+      let startTimeSeconds = convertToSeconds(foundItem.startTime)
+      let endTimeSeconds = convertToSeconds(foundItem.endTime)
+      
       let foundItemCopy =  Object.assign({request: request}, foundItem)
+      foundItemCopy.startTime = startTimeSeconds
+      foundItemCopy.endTime = endTimeSeconds
       props.onFoundTimeElement(foundItemCopy);
     }
 
