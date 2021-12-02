@@ -11,14 +11,14 @@ function Marker(props){
     return (
 
         <Container >
-                <Row onClick={() => props.onMarkerClicked(title)}>
+                <Button onClick={() => props.onMarkerClicked(title)}>
                     <span>{colour}</span>
                     <Col>
                     <span>{title}</span>
                     <span> {time}</span>
                     </Col>
 
-                </Row>
+                </Button>
 
         </Container>
     );
